@@ -1,0 +1,275 @@
+Trainset ID: 1, Route length: 93
+ID: 2, Weight: 500, Type: Passenger
+ID: 13, Weight: 500, Type: Passenger
+ID: 33, Weight: 500, Type: Passenger
+ID: 22, Weight: 500, Type: Passenger
+ID: 11, Weight: 700, Type: Restaurant
+ID: 23, Weight: 700, Type: Restaurant
+ID: 3, Weight: 875, Type: Refrigerator
+ID: 21, Weight: 875, Type: Gaseous
+ID: 37, Weight: 1000, Type: Liquid Toxic Car
+ID: 18, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 3, Route length: 81
+ID: 149, Weight: 500, Type: Passenger
+ID: 141, Weight: 500, Type: Passenger
+ID: 101, Weight: 500, Type: Passenger
+ID: 105, Weight: 500, Type: Passenger
+ID: 133, Weight: 800, Type: Liquid
+ID: 117, Weight: 800, Type: Liquid
+ID: 109, Weight: 825, Type: Railroad Post Office Car
+ID: 150, Weight: 825, Type: Railroad Post Office Car
+ID: 111, Weight: 850, Type: Explosive
+ID: 121, Weight: 875, Type: Refrigerator
+Trainset ID: 25, Route length: 81
+ID: 1230, Weight: 500, Type: Passenger
+ID: 1234, Weight: 500, Type: Passenger
+ID: 1208, Weight: 500, Type: Passenger
+ID: 1204, Weight: 700, Type: Restaurant
+ID: 1241, Weight: 700, Type: Restaurant
+ID: 1212, Weight: 700, Type: Restaurant
+ID: 1238, Weight: 875, Type: Gaseous
+ID: 1237, Weight: 875, Type: Refrigerator
+ID: 1218, Weight: 875, Type: Gaseous
+ID: 1244, Weight: 875, Type: Refrigerator
+Trainset ID: 12, Route length: 72
+ID: 566, Weight: 500, Type: Passenger
+ID: 595, Weight: 500, Type: Passenger
+ID: 565, Weight: 500, Type: Passenger
+ID: 580, Weight: 700, Type: Restaurant
+ID: 555, Weight: 800, Type: Liquid
+ID: 574, Weight: 825, Type: Railroad Post Office Car
+ID: 594, Weight: 850, Type: Explosive
+ID: 600, Weight: 875, Type: Refrigerator
+ID: 592, Weight: 875, Type: Refrigerator
+ID: 552, Weight: 875, Type: Gaseous
+Trainset ID: 5, Route length: 71
+ID: 208, Weight: 500, Type: Passenger
+ID: 241, Weight: 825, Type: Railroad Post Office Car
+ID: 217, Weight: 850, Type: Explosive
+ID: 232, Weight: 850, Type: Explosive
+ID: 220, Weight: 875, Type: Gaseous
+ID: 247, Weight: 875, Type: Refrigerator
+ID: 237, Weight: 875, Type: Refrigerator
+ID: 229, Weight: 875, Type: Refrigerator
+ID: 239, Weight: 875, Type: Refrigerator
+ID: 218, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 22, Route length: 55
+ID: 1064, Weight: 500, Type: Passenger
+ID: 1077, Weight: 500, Type: Passenger
+ID: 1093, Weight: 500, Type: Passenger
+ID: 1058, Weight: 700, Type: Restaurant
+ID: 1075, Weight: 700, Type: Restaurant
+ID: 1060, Weight: 825, Type: Railroad Post Office Car
+ID: 1055, Weight: 875, Type: Gaseous
+ID: 1083, Weight: 875, Type: Refrigerator
+ID: 1080, Weight: 875, Type: Refrigerator
+ID: 1062, Weight: 900, Type: Toxic
+Trainset ID: 2, Route length: 49
+ID: 1251, Weight: 100, Type: Passenger
+ID: 78, Weight: 500, Type: Passenger
+ID: 85, Weight: 500, Type: Passenger
+ID: 70, Weight: 700, Type: Restaurant
+ID: 87, Weight: 700, Type: Restaurant
+ID: 79, Weight: 850, Type: Explosive
+ID: 61, Weight: 850, Type: Explosive
+ID: 94, Weight: 875, Type: Refrigerator
+ID: 77, Weight: 875, Type: Refrigerator
+ID: 97, Weight: 900, Type: Toxic
+Trainset ID: 9, Route length: 42
+ID: 450, Weight: 500, Type: Passenger
+ID: 447, Weight: 500, Type: Passenger
+ID: 444, Weight: 500, Type: Passenger
+ID: 437, Weight: 600, Type: Baggage and Mail
+ID: 403, Weight: 700, Type: Restaurant
+ID: 438, Weight: 700, Type: Restaurant
+ID: 424, Weight: 800, Type: Liquid
+ID: 408, Weight: 875, Type: Refrigerator
+ID: 440, Weight: 875, Type: Refrigerator
+ID: 415, Weight: 900, Type: Toxic
+Trainset ID: 18, Route length: 38
+ID: 883, Weight: 800, Type: Liquid
+ID: 886, Weight: 850, Type: Explosive
+ID: 851, Weight: 875, Type: Refrigerator
+ID: 864, Weight: 875, Type: Refrigerator
+ID: 899, Weight: 875, Type: Gaseous
+ID: 856, Weight: 875, Type: Gaseous
+ID: 889, Weight: 875, Type: Refrigerator
+ID: 879, Weight: 875, Type: Refrigerator
+ID: 868, Weight: 875, Type: Refrigerator
+ID: 869, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 20, Route length: 34
+ID: 952, Weight: 500, Type: Passenger
+ID: 962, Weight: 500, Type: Passenger
+ID: 959, Weight: 600, Type: Baggage and Mail
+ID: 994, Weight: 600, Type: Baggage and Mail
+ID: 979, Weight: 825, Type: Railroad Post Office Car
+ID: 1000, Weight: 875, Type: Refrigerator
+ID: 984, Weight: 875, Type: Gaseous
+ID: 992, Weight: 875, Type: Refrigerator
+ID: 963, Weight: 875, Type: Refrigerator
+ID: 982, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 7, Route length: 32
+ID: 323, Weight: 500, Type: Passenger
+ID: 307, Weight: 500, Type: Passenger
+ID: 340, Weight: 600, Type: Baggage and Mail
+ID: 348, Weight: 700, Type: Restaurant
+ID: 318, Weight: 825, Type: Railroad Post Office Car
+ID: 350, Weight: 850, Type: Explosive
+ID: 330, Weight: 875, Type: Refrigerator
+ID: 310, Weight: 875, Type: Refrigerator
+ID: 312, Weight: 875, Type: Gaseous
+ID: 346, Weight: 875, Type: Refrigerator
+Trainset ID: 13, Route length: 25
+ID: 605, Weight: 500, Type: Passenger
+ID: 641, Weight: 500, Type: Passenger
+ID: 629, Weight: 875, Type: Refrigerator
+ID: 649, Weight: 875, Type: Refrigerator
+ID: 643, Weight: 875, Type: Gaseous
+ID: 611, Weight: 875, Type: Refrigerator
+ID: 622, Weight: 900, Type: Toxic
+ID: 635, Weight: 900, Type: Toxic
+ID: 627, Weight: 1000, Type: Liquid Toxic Car
+ID: 630, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 14, Route length: 22
+ID: 688, Weight: 500, Type: Passenger
+ID: 655, Weight: 500, Type: Passenger
+ID: 671, Weight: 500, Type: Passenger
+ID: 661, Weight: 500, Type: Passenger
+ID: 681, Weight: 600, Type: Baggage and Mail
+ID: 695, Weight: 825, Type: Railroad Post Office Car
+ID: 668, Weight: 850, Type: Explosive
+ID: 674, Weight: 875, Type: Refrigerator
+ID: 653, Weight: 1000, Type: Liquid Toxic Car
+ID: 663, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 23, Route length: 20
+ID: 1122, Weight: 500, Type: Passenger
+ID: 1116, Weight: 600, Type: Baggage and Mail
+ID: 1117, Weight: 700, Type: Restaurant
+ID: 1129, Weight: 825, Type: Railroad Post Office Car
+ID: 1124, Weight: 850, Type: Explosive
+ID: 1134, Weight: 875, Type: Refrigerator
+ID: 1118, Weight: 875, Type: Refrigerator
+ID: 1133, Weight: 875, Type: Refrigerator
+ID: 1110, Weight: 875, Type: Gaseous
+ID: 1148, Weight: 875, Type: Refrigerator
+Trainset ID: 21, Route length: 20
+ID: 1010, Weight: 500, Type: Passenger
+ID: 1033, Weight: 500, Type: Passenger
+ID: 1034, Weight: 500, Type: Passenger
+ID: 1040, Weight: 600, Type: Baggage and Mail
+ID: 1045, Weight: 600, Type: Baggage and Mail
+ID: 1008, Weight: 850, Type: Explosive
+ID: 1027, Weight: 875, Type: Refrigerator
+ID: 1032, Weight: 875, Type: Refrigerator
+ID: 1035, Weight: 900, Type: Toxic
+ID: 1007, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 4, Route length: 16
+ID: 199, Weight: 500, Type: Passenger
+ID: 190, Weight: 500, Type: Passenger
+ID: 183, Weight: 500, Type: Passenger
+ID: 194, Weight: 500, Type: Passenger
+ID: 196, Weight: 600, Type: Baggage and Mail
+ID: 168, Weight: 700, Type: Restaurant
+ID: 189, Weight: 800, Type: Liquid
+ID: 200, Weight: 850, Type: Explosive
+ID: 177, Weight: 875, Type: Refrigerator
+ID: 152, Weight: 900, Type: Toxic
+Trainset ID: 16, Route length: 13
+ID: 790, Weight: 500, Type: Passenger
+ID: 774, Weight: 500, Type: Passenger
+ID: 770, Weight: 500, Type: Passenger
+ID: 760, Weight: 500, Type: Passenger
+ID: 777, Weight: 600, Type: Baggage and Mail
+ID: 796, Weight: 700, Type: Restaurant
+ID: 769, Weight: 800, Type: Liquid
+ID: 772, Weight: 825, Type: Railroad Post Office Car
+ID: 771, Weight: 850, Type: Explosive
+ID: 793, Weight: 875, Type: Refrigerator
+Trainset ID: 11, Route length: 12
+ID: 538, Weight: 500, Type: Passenger
+ID: 537, Weight: 500, Type: Passenger
+ID: 550, Weight: 700, Type: Restaurant
+ID: 529, Weight: 700, Type: Restaurant
+ID: 511, Weight: 800, Type: Liquid
+ID: 547, Weight: 800, Type: Liquid
+ID: 541, Weight: 800, Type: Liquid
+ID: 532, Weight: 875, Type: Refrigerator
+ID: 535, Weight: 875, Type: Refrigerator
+ID: 509, Weight: 875, Type: Refrigerator
+Trainset ID: 19, Route length: 11
+ID: 927, Weight: 500, Type: Passenger
+ID: 911, Weight: 500, Type: Passenger
+ID: 932, Weight: 500, Type: Passenger
+ID: 941, Weight: 600, Type: Baggage and Mail
+ID: 928, Weight: 600, Type: Baggage and Mail
+ID: 938, Weight: 600, Type: Baggage and Mail
+ID: 915, Weight: 875, Type: Refrigerator
+ID: 933, Weight: 875, Type: Refrigerator
+ID: 921, Weight: 900, Type: Toxic
+ID: 909, Weight: 900, Type: Toxic
+Trainset ID: 17, Route length: 10
+ID: 826, Weight: 500, Type: Passenger
+ID: 847, Weight: 500, Type: Passenger
+ID: 848, Weight: 500, Type: Passenger
+ID: 830, Weight: 600, Type: Baggage and Mail
+ID: 805, Weight: 600, Type: Baggage and Mail
+ID: 822, Weight: 600, Type: Baggage and Mail
+ID: 820, Weight: 800, Type: Liquid
+ID: 825, Weight: 875, Type: Gaseous
+ID: 836, Weight: 875, Type: Refrigerator
+ID: 834, Weight: 875, Type: Refrigerator
+Trainset ID: 24, Route length: 8
+ID: 1185, Weight: 500, Type: Passenger
+ID: 1168, Weight: 600, Type: Baggage and Mail
+ID: 1152, Weight: 825, Type: Railroad Post Office Car
+ID: 1183, Weight: 825, Type: Railroad Post Office Car
+ID: 1198, Weight: 850, Type: Explosive
+ID: 1169, Weight: 875, Type: Refrigerator
+ID: 1153, Weight: 875, Type: Refrigerator
+ID: 1194, Weight: 875, Type: Refrigerator
+ID: 1200, Weight: 875, Type: Refrigerator
+ID: 1170, Weight: 900, Type: Toxic
+Trainset ID: 8, Route length: 7
+ID: 374, Weight: 500, Type: Passenger
+ID: 381, Weight: 600, Type: Baggage and Mail
+ID: 367, Weight: 825, Type: Railroad Post Office Car
+ID: 397, Weight: 875, Type: Refrigerator
+ID: 361, Weight: 875, Type: Refrigerator
+ID: 384, Weight: 875, Type: Refrigerator
+ID: 380, Weight: 875, Type: Refrigerator
+ID: 382, Weight: 1000, Type: Liquid Toxic Car
+ID: 357, Weight: 1000, Type: Liquid Toxic Car
+ID: 398, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 15, Route length: 6
+ID: 708, Weight: 500, Type: Passenger
+ID: 728, Weight: 500, Type: Passenger
+ID: 716, Weight: 600, Type: Baggage and Mail
+ID: 734, Weight: 600, Type: Baggage and Mail
+ID: 706, Weight: 700, Type: Restaurant
+ID: 721, Weight: 800, Type: Liquid
+ID: 704, Weight: 825, Type: Railroad Post Office Car
+ID: 719, Weight: 875, Type: Refrigerator
+ID: 710, Weight: 875, Type: Refrigerator
+ID: 739, Weight: 875, Type: Refrigerator
+Trainset ID: 10, Route length: 5
+ID: 498, Weight: 500, Type: Passenger
+ID: 500, Weight: 500, Type: Passenger
+ID: 474, Weight: 500, Type: Passenger
+ID: 477, Weight: 500, Type: Passenger
+ID: 453, Weight: 700, Type: Restaurant
+ID: 463, Weight: 800, Type: Liquid
+ID: 473, Weight: 875, Type: Gaseous
+ID: 480, Weight: 875, Type: Refrigerator
+ID: 461, Weight: 900, Type: Toxic
+ID: 488, Weight: 1000, Type: Liquid Toxic Car
+Trainset ID: 6, Route length: 3
+ID: 294, Weight: 500, Type: Passenger
+ID: 274, Weight: 500, Type: Passenger
+ID: 278, Weight: 600, Type: Baggage and Mail
+ID: 266, Weight: 600, Type: Baggage and Mail
+ID: 265, Weight: 825, Type: Railroad Post Office Car
+ID: 267, Weight: 825, Type: Railroad Post Office Car
+ID: 298, Weight: 875, Type: Refrigerator
+ID: 256, Weight: 875, Type: Refrigerator
+ID: 293, Weight: 875, Type: Refrigerator
+ID: 286, Weight: 900, Type: Toxic
