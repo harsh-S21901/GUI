@@ -1,14 +1,16 @@
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Ghost {
     private int row;
     private int col;
-    private Color color;
+   private GhostIcon icon;
 
-    public Ghost(int row, int col, Color color) {
+    public Ghost(int row, int col, GhostIcon icon) {
         this.row = row;
         this.col = col;
-        this.color = color;
+        this.icon = icon;
     }
 
     public int getRow() {
@@ -27,23 +29,11 @@ public class Ghost {
         this.col = col;
     }
 
-    public Color getColor() {
-        return color;
+    public GhostIcon getIcon() {
+        return icon;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public void move(int targetRow, int targetCol) {
-        if (row < targetRow) {
-            row++;
-        } else if (row > targetRow) {
-            row--;
-        } else if (col < targetCol) {
-            col++;
-        } else if (col > targetCol) {
-            col--;
-        }
+    public void setIcon(GhostIcon icon) {
+        this.icon = icon;
     }
 }

@@ -86,9 +86,10 @@ public class StartWindow extends JFrame implements ActionListener {
             int row = Integer.parseInt(rowSizeField.getText());
             int col = Integer.parseInt(colSizeField.getText());
             if (row >= 10 && row <= 100 || col >= 10 && col <= 100) {
-                // start new game with board size
                 dispose();
-                new PacmanGame(row, col);
+                GameModel gameModel = new GameModel(row,col);
+                GameView gameView = new GameView();
+                GameController gameController = new GameController(gameModel,gameView);
             }
             else {
                 JOptionPane.showMessageDialog(this, "Invalid board size! Please enter a number between 10 and 100.");
