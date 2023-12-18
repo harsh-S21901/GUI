@@ -1,2 +1,2 @@
 # GUI
-Purpose of this repository is to store projects made in PJATK university for subject GUI
+Purpose of this repository is storing tasks given by PJATK (PJWSTK).
