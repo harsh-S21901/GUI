@@ -1,0 +1,5 @@
+john,400
+johnny,800
+max,600
+harry,1040
+harry,1260

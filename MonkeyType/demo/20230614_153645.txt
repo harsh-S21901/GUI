@@ -1,0 +1,9 @@
+a -> 8wpm
+aa -> 10wpm
+aaa -> 9wpm
+aah -> 8wpm
+aahed -> 8wpm
+aahing -> 8wpm
+aahs -> 9wpm
+aal -> 8wpm
+aalii -> 7wpm

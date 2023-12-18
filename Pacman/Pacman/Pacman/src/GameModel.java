@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class GameModel {
     public static Ghost[] ghosts;
@@ -17,7 +18,6 @@ public class GameModel {
         tableModel = new CustomTableModel(numRows, numCols, maze);
         GameView.gameBoard = new JTable(tableModel);
         ghosts = new Ghost[4];
-        List<Upgrade> upgrades = new ArrayList<>();
 
         ghosts[0] = new Ghost(1, 1, GhostIcon.CYAN_GHOST);
         ghosts[1] = new Ghost(numRows - 2, numCols - 2, GhostIcon.RED_GHOST);
@@ -25,84 +25,15 @@ public class GameModel {
         ghosts[3] = new Ghost(numRows - 2, 1, GhostIcon.YELLOW_RED_GHOST);
     }
 
-    static void moveGhost(Ghost ghost) {
-        int row = ghost.getRow();
-        int col = ghost.getCol();
-
-        List<int[]> emptyNeighbors = new ArrayList<>();
-        if (row > 0 && !tableModel.isObstacle(row - 1, col)) {
-            emptyNeighbors.add(new int[]{row - 1, col}); // Up
-        }
-        if (row < tableModel.getRowCount() - 1 && !tableModel.isObstacle(row + 1, col)) {
-            emptyNeighbors.add(new int[]{row + 1, col}); // Down
-        }
-        if (col > 0 && !tableModel.isObstacle(row, col - 1)) {
-            emptyNeighbors.add(new int[]{row, col - 1}); // Left
-        }
-        if (col < tableModel.getColumnCount() - 1 && !tableModel.isObstacle(row, col + 1)) {
-            emptyNeighbors.add(new int[]{row, col + 1}); // Right
-        }
-        Collections.shuffle(emptyNeighbors);
-
-        if (!emptyNeighbors.isEmpty()) {
-            int[] nextCell = emptyNeighbors.get(0);
-            int nextRow = nextCell[0];
-            int nextCol = nextCell[1];
-
-            tableModel.clearGhost(row, col);
-            tableModel.setGhost(nextRow, nextCol, ghost);
-            ghost.setRow(nextRow);
-            ghost.setCol(nextCol);
-
-            if (nextRow == tableModel.pacmanRow && nextCol == tableModel.pacmanCol) {
-                handleCollision();
+    static void dropUpgrade() {
+        for (Ghost ghost : ghosts) {
+            int numCols = ghost.getCol();
+            int numRows = ghost.getRow();
+            if (!GameModel.tableModel.isObstacle(numRows, numCols)) {
+                ImageIcon upgradeIcon = new ImageIcon("src/assets/heart.png");
+                GameModel.tableModel.setUpgrade(numRows, numCols, upgradeIcon);
             }
-            tableModel.fireTableDataChanged();
-            GameView.gameBoard.repaint();
-        } else {
         }
-    }
-
-    static void movePacman(int rowOffset, int colOffset) {
-        int newRow = tableModel.pacmanRow + rowOffset;
-        int newCol = tableModel.pacmanCol + colOffset;
-
-        if (isValidMove(newRow, newCol)) {
-            if (tableModel.isPellet(newRow, newCol) && !tableModel.isPelletEaten(newRow, newCol)) {
-                tableModel.setPelletEaten(newRow, newCol);
-                tableModel.increaseScore(10);
-                GameView.updateScore(tableModel.getScore());
-            }
-            tableModel.setValueAt("", tableModel.pacmanRow, tableModel.pacmanCol);
-            tableModel.setValueAt("P", newRow, newCol);
-            tableModel.pacmanRow = newRow;
-            tableModel.pacmanCol = newCol;
-            if (tableModel.isObstacle(newRow, newCol)) {
-                handleCollision();
-            }
-            tableModel.fireTableDataChanged();
-            GameView.gameBoard.repaint();
-        }
-    }
-
-    private static boolean isValidMove(int row, int col) {
-        return row >= 0 && row < tableModel.getRowCount() &&
-                col >= 0 && col < tableModel.getColumnCount() &&
-                !tableModel.isObstacle(row, col);
-    }
-
-    private static void handleCollision() {
-        lives--;
-        score -= 10;
-        GameView.updateLives(lives);
-        if (lives == 0) {
-            JOptionPane.showMessageDialog(null, "Game Over! Your score: " + score);
-            resetGame();
-        }
-    }
-
-    static void resetGame() {
-        GameModel gameModel = new GameModel(tableModel.numRows, tableModel.numCols);
     }
 
     static void generateMazeRecursive(boolean[][] maze, int row, int col) {
@@ -135,25 +66,61 @@ public class GameModel {
             }
         }
         generateMazeRecursive(maze, 1, 1);
+        Random random = new Random();
+        int numBlocksToRemove = (int) (0.1 * numRows * numCols);
+        for (int i = 0; i < numBlocksToRemove; i++) {
+            int randomRow = 1 + random.nextInt(numRows - 2);
+            int randomCol = 1 + random.nextInt(numCols - 2);
+            maze[randomRow][randomCol] = false;
+        }
+
         return maze;
     }
 
-    public static class CustomTableModel extends AbstractTableModel {
-        private final int numRows;
-        private final int numCols;
+    public enum PacmanIcon {
+        PACMAN_UP_OPEN("src/assets/pacmanUpOpen.png"),
+        PACMAN_UP_CLOSED("src/assets/pacmanUpClosed.png"),
+        PACMAN_DOWN_OPEN("src/assets/pacmanDownOpen.png"),
+        PACMAN_DOWN_CLOSED("src/assets/pacmanDownClosed.png"),
+        PACMAN_LEFT_OPEN("src/assets/pacmanLeftOpen.png"),
+        PACMAN_LEFT_CLOSED("src/assets/pacmanLeftClosed.png"),
+        PACMAN_RIGHT_OPEN("src/assets/Pacman_HD.png"),
+        PACMAN_RIGHT_CLOSED("src/assets/Pacman_Closed_HD.png"),
+        PACMAN_DEFAULT("src/assets/Pacman_HD.png");
+
+        private final String imagePath;
+
+        PacmanIcon(String imagePath) {
+            this.imagePath = imagePath;
+        }
+
+        public ImageIcon getIcon() {
+            return new ImageIcon(imagePath);
+        }
+    }
+
+    public static class CustomTableModel extends AbstractTableModel implements Runnable {
+        final int numRows;
+        final int numCols;
         private final Object[][] data;
         private final boolean[][] obstacles;
         private final Ghost[][] ghosts;
-        private final ImageIcon pacmanIcon;
+        private final List<Pellet> pellets;
+        private final boolean[][] upgrades;
+        ImageIcon pacmanIcon;
         int pacmanRow;
         int pacmanCol;
-        private final List<Pellet> pellets;
+        private boolean isAnimating;
+        private int animationDelay = 200;
+        private int pacmanAnimationFrame;
+        private boolean pacmanMouthOpen;
         private int score;
 
         public CustomTableModel(int numRows, int numCols, boolean[][] obstacles) {
             this.numRows = numRows;
             this.numCols = numCols;
             this.obstacles = obstacles;
+            upgrades = new boolean[numRows][numCols];
             pacmanIcon = new ImageIcon("src/assets/Pacman_HD.png");
             ImageIcon pelletIcon = new ImageIcon("src/assets/pellet.png");
             Image smallPelletImage = pelletIcon.getImage().getScaledInstance(5, 5, Image.SCALE_DEFAULT);
@@ -175,6 +142,27 @@ public class GameModel {
             data[pacmanRow][pacmanCol] = new ImageIcon("src/assets/Pacman_HD.png");
         }
 
+        @Override
+        public void run() {
+            isAnimating = true;
+            while (isAnimating) {
+                pacmanAnimationFrame = (pacmanAnimationFrame + 1) % 2;
+                pacmanMouthOpen = !pacmanMouthOpen;
+                tableModel.fireTableDataChanged();
+
+                try {
+                    Thread.sleep(animationDelay);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void startAnimation(int animationDelay) {
+            this.animationDelay = animationDelay;
+            new Thread(this).start();
+        }
+
         public boolean isPellet(int row, int col) {
             for (Pellet pellet : pellets) {
                 if (pellet.getRow() == row && pellet.getColumn() == col) {
@@ -183,6 +171,7 @@ public class GameModel {
             }
             return false;
         }
+
 
         public int getScore() {
             return score;
@@ -211,9 +200,32 @@ public class GameModel {
             }
         }
 
+        public boolean hasUpgrade(int row, int col) {
+            Object value = data[row][col];
+            return value instanceof ImageIcon && upgrades[row][col];
+        }
+
+
+        public void removeUpgrade(int row, int col) {
+            upgrades[row][col] = false; // Remove the upgrade at the specified position
+            fireTableCellUpdated(row, col);
+        }
+
+        public boolean isUpgrade(int row, int col) {
+            return upgrades[row][col];
+        }
+
+
+        public void setUpgrade(int row, int col, ImageIcon upgradeIcon) {
+            upgrades[row][col] = true;
+            data[row][col] = upgradeIcon;
+            fireTableCellUpdated(row, col);
+        }
+
+
         public boolean isPelletEaten(int row, int col) {
             for (Pellet pellet : pellets) {
-                if (pellet.getRow() == row && pellet.getColumn() == col) {
+                if (pellet.getRow() == row && pellet.getColumn() == col && !upgrades[row][col]) {
                     return pellet.isEaten();
                 }
             }
@@ -245,16 +257,39 @@ public class GameModel {
         @Override
         public Object getValueAt(int row, int col) {
             Ghost ghost = ghosts[row][col];
-
             if (row == pacmanRow && col == pacmanCol) {
-                return pacmanIcon;
+                if (pacmanMouthOpen) {
+                    if (GameController.view.movingUp[0]) {
+                        return PacmanIcon.PACMAN_UP_OPEN.getIcon();
+                    } else if (GameController.view.movingDown[0]) {
+                        return PacmanIcon.PACMAN_DOWN_OPEN.getIcon();
+                    } else if (GameController.view.movingLeft[0]) {
+                        return PacmanIcon.PACMAN_LEFT_OPEN.getIcon();
+                    } else if (GameController.view.movingRight[0]) {
+                        return PacmanIcon.PACMAN_RIGHT_OPEN.getIcon();
+                    } else {
+                        return PacmanIcon.PACMAN_DEFAULT.getIcon();
+                    }
+                } else {
+                    if (GameController.view.movingUp[0]) {
+                        return PacmanIcon.PACMAN_UP_CLOSED.getIcon();
+                    } else if (GameController.view.movingDown[0]) {
+                        return PacmanIcon.PACMAN_DOWN_CLOSED.getIcon();
+                    } else if (GameController.view.movingLeft[0]) {
+                        return PacmanIcon.PACMAN_LEFT_CLOSED.getIcon();
+                    } else if (GameController.view.movingRight[0]) {
+                        return PacmanIcon.PACMAN_RIGHT_CLOSED.getIcon();
+                    } else {
+                        return PacmanIcon.PACMAN_DEFAULT.getIcon();
+                    }
+                }
             } else if (ghost != null) {
                 GhostIcon ghostIcon = ghost.getIcon();
                 return convertGhostIconToImageIcon(ghostIcon);
-            } else {
-                return data[row][col];
             }
+            return data[row][col];
         }
+
 
         public ImageIcon convertGhostIconToImageIcon(GhostIcon ghostIcon) {
             String imagePath = ghostIcon.getImagePath();
@@ -265,11 +300,12 @@ public class GameModel {
         public void setValueAt(Object value, int rowIndex, int columnIndex) {
             data[rowIndex][columnIndex] = value;
             if (value instanceof ImageIcon) {
-                JLabel label = new JLabel();
-                label.setIcon(new ImageIcon("src/assets/Pacman_HD.png"));
-                data[pacmanRow][pacmanCol] = null;
-                pacmanRow = rowIndex;
-                pacmanCol = columnIndex;
+                if (hasUpgrade(rowIndex, columnIndex)) {
+                    removeUpgrade(rowIndex, columnIndex);
+                } else {
+                    isAnimating = true;
+                    new Thread(this).start();
+                }
             } else if (value instanceof Ghost ghost) {
                 if (ghosts[rowIndex][columnIndex] != null) {
                     data[ghosts[rowIndex][columnIndex].getRow()][ghosts[rowIndex][columnIndex].getCol()] = null;
@@ -294,19 +330,26 @@ public class GameModel {
 
     static class CustomCellRenderer extends DefaultTableCellRenderer {
         private final CustomTableModel model;
+        private ImageIcon obstacleIcon = new ImageIcon("src/assets/block.png");
+
         public CustomCellRenderer(CustomTableModel model) {
             this.model = model;
+            Image smallObstacle = obstacleIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+            this.obstacleIcon = new ImageIcon(smallObstacle);
         }
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (model.isObstacle(row, column)) {
-                component.setBackground(Color.BLUE);
+                component.setBackground(table.getBackground());
+                setIcon(obstacleIcon);
             } else if (model.isPelletEaten(row, column)) {
                 component.setBackground(table.getBackground());
+                setIcon(null);
             } else {
                 component.setBackground(table.getBackground());
+                setIcon((Icon) value);
             }
             Ghost ghost = model.getGhostAt(row, column);
             if (ghost != null) {

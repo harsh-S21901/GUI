@@ -25,4 +25,3 @@ public class Pellet {
         this.eaten = eaten;
     }
 }
-

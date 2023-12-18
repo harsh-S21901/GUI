@@ -2,24 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 public class StartWindow extends JFrame implements ActionListener {
 
+    private static int highScore;
     private final JButton newGameButton;
     private final JButton highScoreButton;
     private final JButton exitButton;
     private final JTextField rowSizeField;
     private final JTextField colSizeField;
-    private static int highScore;
-
-    public static int getHighScore(){
-        return highScore;
-    }
 
     public StartWindow() {
         setTitle("Pacman Game");
@@ -35,7 +27,6 @@ public class StartWindow extends JFrame implements ActionListener {
         JLabel rowSizeLabel = new JLabel("Enter board rows (10-100): ");
         rowSizeLabel.setForeground(Color.WHITE);
         rowSizeField = new JTextField(10);
-
 
         JLabel colSizeLabel = new JLabel("Enter board columns (10-100): ");
         colSizeLabel.setForeground(Color.WHITE);
@@ -77,45 +68,37 @@ public class StartWindow extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    public static int getHighScore() {
+        return highScore;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newGameButton) {
-            if(rowSizeField.getText().isBlank() || colSizeField.getText().isBlank()){
+            if (rowSizeField.getText().isBlank() || colSizeField.getText().isBlank()) {
                 JOptionPane.showMessageDialog(this, "Invalid board size! Please enter a number between 10 and 100.");
             }
             int row = Integer.parseInt(rowSizeField.getText());
             int col = Integer.parseInt(colSizeField.getText());
             if (row >= 10 && row <= 100 || col >= 10 && col <= 100) {
                 dispose();
-                GameModel gameModel = new GameModel(row,col);
+                GameModel gameModel = new GameModel(row, col);
                 GameView gameView = new GameView();
-                GameController gameController = new GameController(gameModel,gameView);
-            }
-            else {
+                GameController gameController = new GameController(gameModel, gameView);
+                gameView.setVisible(true);
+
+            } else {
                 JOptionPane.showMessageDialog(this, "Invalid board size! Please enter a number between 10 and 100.");
             }
         } else if (e.getSource() == highScoreButton) {
-            try {
-                // read high scores from file using Java serialization
-                FileInputStream fileIn = new FileInputStream("highscores.ser");
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                ArrayList<Integer> highScores = (ArrayList<Integer>) in.readObject();
-                in.close();
-                fileIn.close();
-                highScores.sort(Collections.reverseOrder());
-                highScore = highScores.get(0);
-                StringBuilder message = new StringBuilder("Highest Scores:\n");
-                int count = 1;
-                for (int score : highScores) {
-                    message.append(count).append(". ").append(score).append("\n");
-                    count++;
-                }
-                JOptionPane.showMessageDialog(this, message.toString());
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "No high scores yet!");
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace();
+            List<HighScoreEntry> highScores = HighScoreEntry.loadHighScore();
+            if (highScores == null) {
+                JOptionPane.showMessageDialog(this, "No High Scores Yet!!", "High Scores", JOptionPane.PLAIN_MESSAGE);
+                return;
             }
+            HighScoreUI highScoreUI = new HighScoreUI();
+            highScoreUI.updateHighScores(highScores);
+            JOptionPane.showMessageDialog(this, HighScoreUI.getHighScoresScrollPane(), "High Scores", JOptionPane.PLAIN_MESSAGE);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }

@@ -1,11 +1,7 @@
-import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
-
 public class Ghost {
     private int row;
     private int col;
-   private GhostIcon icon;
+    private GhostIcon icon;
 
     public Ghost(int row, int col, GhostIcon icon) {
         this.row = row;

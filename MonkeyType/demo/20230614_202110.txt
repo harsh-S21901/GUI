@@ -1,0 +1,3 @@
+cartilage -> 14wpm
+appendixes -> 15wpm
+rendible -> 2wpm

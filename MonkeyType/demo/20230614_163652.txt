@@ -1,0 +1,8 @@
+h -> 13wpm
+h -> 11wpm
+h -> 10wpm
+h -> 9wpm
+h -> 7wpm
+h -> 7wpm
+h -> 7wpm
+h -> 6wpm

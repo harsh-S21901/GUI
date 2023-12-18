@@ -1,22 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class GameView extends JFrame {
     static JTable gameBoard;
     private static JLabel scoreLabel;
     private static JLabel lifeLabel;
+    private static int highScore = 0;
+    final boolean[] movingUp = {false};
+    final boolean[] movingDown = {false};
+    final boolean[] movingLeft = {false};
+    final boolean[] movingRight = {false};
     JPanel gamePanel = new JPanel(new BorderLayout()) {
         @Override
         public boolean isFocusable() {
             return true;
         }
     };
-    final boolean[] movingUp = {false};
-    final boolean[] movingDown = {false};
-    final boolean[] movingLeft = {false};
-    final boolean[] movingRight = {false};
-    private List<HighScoreEntry> highScores;
+
     public GameView() {
 
         gameBoard.setRowHeight(20);
@@ -37,7 +37,7 @@ public class GameView extends JFrame {
         lifeLabel.setForeground(Color.white);
         lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel highScoreLabel = new JLabel("High Score: " + StartWindow.getHighScore());
+        JLabel highScoreLabel = new JLabel("High Score: " + getHighScore());
         highScoreLabel.setFont(new Font("Arial", Font.BOLD, 15));
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -60,13 +60,13 @@ public class GameView extends JFrame {
         Thread movementThread = new Thread(() -> {
             while (true) {
                 if (movingUp[0]) {
-                    GameModel.movePacman(-1, 0);
+                    GameController.movePacman(-1, 0);
                 } else if (movingDown[0]) {
-                    GameModel.movePacman(1, 0);
+                    GameController.movePacman(1, 0);
                 } else if (movingLeft[0]) {
-                    GameModel.movePacman(0, -1);
+                    GameController.movePacman(0, -1);
                 } else if (movingRight[0]) {
-                    GameModel.movePacman(0, 1);
+                    GameController.movePacman(0, 1);
                 }
                 try {
                     Thread.sleep(200);
@@ -77,9 +77,17 @@ public class GameView extends JFrame {
         });
         movementThread.start();
         Thread ghostMovementThread = new Thread(() -> {
+            long lastUpgradeDropTime = System.currentTimeMillis();
             while (true) {
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastUpgradeDropTime >= 5000) {
+                    if (GameController.shouldDropUpgrade()) {
+                        GameModel.dropUpgrade();
+                        lastUpgradeDropTime = currentTime;
+                    }
+                }
                 for (Ghost ghost : GameModel.ghosts) {
-                    GameModel.moveGhost(ghost);
+                    GameController.moveGhost(ghost);
                 }
                 try {
                     Thread.sleep(500);
@@ -93,12 +101,22 @@ public class GameView extends JFrame {
         updateLives(GameModel.lives);
     }
 
+
     static void updateScore(int score) {
         scoreLabel.setText("Score: " + score);
     }
 
     static void updateLives(int lives) {
         lifeLabel.setText(String.valueOf(lives));
+    }
+
+    static int getHighScore() {
+        if (HighScoreEntry.loadHighScore().size() == 0) {
+            highScore = 0;
+        } else {
+            highScore = HighScoreEntry.loadHighScore().get(0).getScore();
+        }
+        return highScore;
     }
 
 }
